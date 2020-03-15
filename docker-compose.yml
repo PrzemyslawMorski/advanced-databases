@@ -1,4 +1,7 @@
 version: "2.1"
+# using 2.1 here allows for easy health-check syntax
+# bumping to 3.X would require implementing manual health checking in the migrator
+
 services:
   database:
     container_name: dvd_rental_db
