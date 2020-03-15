@@ -5,6 +5,7 @@ This repo is the workplace of the Advanced Databases course that's taught in pol
 The courses revolves around database-related knowledge.
 
 Stage 1 - defining the data model
+
 Stage 2 - creating a test environment
 
 # Test environment for a PostgreSQL database
