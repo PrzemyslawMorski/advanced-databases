@@ -1,0 +1,22 @@
+version: "2"
+services:
+  database:
+    container_name: oracle_db
+    image: container-registry.oracle.com/database/enterprise:12.1.0.2
+    # volumes:
+    #  - /home/oracle/oradata:/opt/oracle/oradata # persistent oracle database data.
+    ports:
+      - 1521:1521
+      - 8080:8080
+      - 5500:5500
+    networks:
+      - oracle_network
+  client:
+    container_name: oracle_client
+    image: container-registry.oracle.com/database/instantclient
+    tty: true
+    networks:
+      - oracle_network
+
+networks:
+  oracle_network:
