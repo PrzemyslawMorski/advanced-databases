@@ -7,7 +7,7 @@ The courses revolves around database-related knowledge.
 Stage 1 - defining the data model
 Stage 2 - creating a test environment
 
-# Test environment for an Oracle Standard edition 2 ver. 12.1.0.2
+# Test environment for a PostgreSQL database
 
 ## Content:
 
@@ -17,7 +17,6 @@ Stage 2 - creating a test environment
 
 - Docker
 - docker-compose
-- You need to have an account in the oracle docker image registry and docker login container-registry.oracle.com
 
 ## Usage instructions:
 
@@ -33,3 +32,21 @@ Stage 2 - creating a test environment
   docker-compose restart
 - **Deleting the configuration**  
   docker-compose down -v
+
+
+## Credentials
+
+- **pgAdmin:**
+admin/admin
+
+- **postgres**
+postgres/password
+
+## Container addresses
+
+- **pgAdmin:**
+localhost:5430 or dvd_rental_pgadmin:5430 in dvd_rental_network
+
+- **postgres**
+localhost:5432 or dvd_rental_db:5430 in dvd_rental_network (e.g. from pgAdmin)
+

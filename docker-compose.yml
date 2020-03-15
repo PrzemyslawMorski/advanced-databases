@@ -1,22 +1,45 @@
-version: "2"
+version: "2.1"
 services:
   database:
-    container_name: oracle_db
-    image: container-registry.oracle.com/database/enterprise:12.1.0.2
-    # volumes:
-    #  - /home/oracle/oradata:/opt/oracle/oradata # persistent oracle database data.
+    container_name: dvd_rental_db
+    image: postgres
     ports:
-      - 1521:1521
-      - 8080:8080
-      - 5500:5500
+      - 5432:5432
+    environment:
+      - PGPASSWORD=password
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_HOST_AUTH_METHOD=trust
     networks:
-      - oracle_network
-  client:
-    container_name: oracle_client
-    image: container-registry.oracle.com/database/instantclient
-    tty: true
+      - dvd_rental_network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  migrator:
+    image: postgres
+    environment:
+      - PGPASSWORD=password
+    volumes:
+      - ./dvdrental:/opt/dvdrental
+    depends_on:
+      database:
+        condition: service_healthy
     networks:
-      - oracle_network
+      - dvd_rental_network
+    command: psql -h dvd_rental_db -p 5432 -U postgres -w -a -f /opt/dvdrental/restore.sql
+
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: dvd_rental_pgadmin
+    ports:
+      - 5430:80
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=admin
+      - PGADMIN_DEFAULT_PASSWORD=admin
+    networks:
+      - dvd_rental_network
 
 networks:
-  oracle_network:
+  dvd_rental_network:

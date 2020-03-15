@@ -1,1 +1,1 @@
-docker exec -ti oracle_client sqlplus sys/Oradoc_db1@oracle_db:1521/ORCL as sysdba
+docker exec -ti dvd_rental_db psql -U postgres -c $1

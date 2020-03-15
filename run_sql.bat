@@ -1,0 +1,1 @@
+docker exec -ti dvd_rental_db psql -U postgres -c %1
