@@ -23,7 +23,7 @@ Stage 2 - creating a test environment
 - **First run:**  
   docker-compose up -d
 - **Run sql commands using the oracle_client container:**  
-  docker exec -ti oracle_client sqlplus usr/pwd@pdb
+  Use the run_sql.bat script on windows and run_sql.sh on linux. Pass an SQL query as first param like so run_sql.bat 'select \* from mytable'
 - **Shutting down:**  
   docker-compose stop
 - **Subsequent runs:**  
@@ -33,20 +33,18 @@ Stage 2 - creating a test environment
 - **Deleting the configuration**  
   docker-compose down -v
 
-
 ## Credentials
 
 - **pgAdmin:**
-admin/admin
+  admin/admin
 
 - **postgres**
-postgres/password
+  postgres/password
 
 ## Container addresses
 
 - **pgAdmin:**
-localhost:5430 or dvd_rental_pgadmin:5430 in dvd_rental_network
+  localhost:5430 or dvd_rental_pgadmin:5430 in dvd_rental_network
 
 - **postgres**
-localhost:5432 or dvd_rental_db:5430 in dvd_rental_network (e.g. from pgAdmin)
-
+  localhost:5432 or dvd_rental_db:5430 in dvd_rental_network (e.g. from pgAdmin)
