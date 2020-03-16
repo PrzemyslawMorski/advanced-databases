@@ -23,8 +23,8 @@ Stage 2 - creating a test environment
 
 - **First run:**  
   docker-compose up -d
-- **Run sql commands using the oracle_client container:**  
-  Use the run_sql.bat script on windows and run_sql.sh on linux. Pass an SQL query as first param like so run_sql.bat 'select \* from mytable'
+- **Run sql command from query.sql:**  
+  docker-compose -f docker-compose.query.yml up
 - **Shutting down:**  
   docker-compose stop
 - **Subsequent runs:**  
