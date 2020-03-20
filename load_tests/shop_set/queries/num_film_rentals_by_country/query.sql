@@ -1,7 +1,7 @@
 with film_rentals_by_country as (
     select
         f.film_id,
-        count(*) as num_rentals,
+        count(r.rental_id) as num_rentals,
         ctry.country_id
     from
         film f

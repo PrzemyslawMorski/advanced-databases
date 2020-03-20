@@ -2,7 +2,7 @@ with staff_sales_with_avg_sales as (
     with avg_staff_sales as (
         with staff_sales as (
             select
-                count(*) as num_sales
+                count(r.rental_id) as num_sales
             from
                 staff s
                 left outer join rental r on s.staff_id = r.staff_id
@@ -15,7 +15,7 @@ with staff_sales_with_avg_sales as (
             staff_sales
     )
     select
-        count(*) as num_sales,
+        count(r.rental_id) as num_sales,
         first_name,
         last_name,
         (

@@ -1,7 +1,7 @@
 with rentals_by_actor as (
 	select
 		a.actor_id,
-		count(*) as num_rentals
+		count(r.rental_id) as num_rentals
 	from
 		actor a
 		left outer join film_actor fa on a.actor_id = fa.actor_id
