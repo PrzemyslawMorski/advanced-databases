@@ -31,7 +31,10 @@ with staff_sales_with_avg_sales as (
         s.staff_id
 )
 select
-    *
+    first_name,
+	last_name,
+	num_sales,
+	average_sales_per_staff
 from
     staff_sales_with_avg_sales
 where
