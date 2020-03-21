@@ -1,1 +1,5 @@
 ~*.docx
+/load_tests/data_generation/__pycache__/*
+/load_tests/data_generation/venv/*
+.idea
+logs

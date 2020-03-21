@@ -1,0 +1,1 @@
+curl "https://api.mockaroo.com/api/1d0bd460?count=5000&key=1cdc7d30" > "data.csv"

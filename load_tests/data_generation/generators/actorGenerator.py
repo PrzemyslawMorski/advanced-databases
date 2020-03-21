@@ -1,0 +1,22 @@
+from dataclasses import dataclass
+from .idGenerator import IdGenerator
+from mockDataReader import MockDataReader
+
+
+@dataclass
+class Actor:
+    actor_id: str
+    first_name: str
+    last_name: str
+    last_update: str
+
+    def generate(self=None, number=1):
+        actors = []
+        reader = MockDataReader()
+        for i in range(0, number):
+            row = reader.getRow()
+            actors.append(Actor(actor_id=IdGenerator.getId(),
+                                first_name=row[reader.first_name],
+                                last_name=row[reader.last_name],
+                                last_update=row[reader.time]))
+        return actors
