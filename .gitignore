@@ -3,3 +3,4 @@
 /load_tests/data_generation/venv/*
 .idea
 logs
+~*.pyc

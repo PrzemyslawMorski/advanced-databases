@@ -35,9 +35,9 @@ class Staff:
                                   email=row[reader.email],
                                   store_id=storeId,
                                   active=isActive,
-                                  last_update=row[reader.date] + " " + row[reader.time],
-                                  password=row[reader.password],
+                                  last_update="2006-02-15 09:45:30",
+                                  password="mockedPassword",
                                   picture=row[reader.password],
-                                  username=row[reader.login])
+                                  username="mockedUsername")
                             )
         return entities

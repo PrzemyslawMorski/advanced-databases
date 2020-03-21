@@ -55,7 +55,7 @@ class CSVWriter:
         self.writeToFile("staff", self.staff)
 
     def writeStores(self, number):
-        managers = Staff.generate(addresses=self.addresses, stores= None, number=math.floor(number/2))
+        managers = Staff.generate(addresses=self.addresses, stores= None, number=number)
         self.stores = Store.generate(addresses=self.addresses, managers=managers)
         self.writeToFile("staff", managers)
         self.writeToFile("store", self.stores)

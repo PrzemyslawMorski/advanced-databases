@@ -25,8 +25,8 @@ class Address:
                                     address=row[reader.address],
                                     district=row[reader.state],
                                     city_id=cityId,
-                                    postal_code=row[reader.postalCode],
+                                    postal_code="mockPostalCode",
                                     address2="",
                                     phone=row[reader.phone],
-                                    last_update=row[reader.date] + " " + row[reader.time]))
+                                    last_update="2006-02-15 09:45:30"))
         return entities

@@ -20,6 +20,6 @@ class City:
             entities.append(City(city_id=IdGenerator.getId(),
                                  city=row[reader.city],
                                  country_id=random.getGaussianRand(108)+1,
-                                 last_update=row[reader.date] + " " + row[reader.time])
+                                 last_update="2006-02-15 09:45:30")
                             )
         return entities

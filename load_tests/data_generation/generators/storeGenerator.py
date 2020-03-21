@@ -15,15 +15,15 @@ class Store:
         entities = []
         reader = MockDataReader()
         random = RandomNumberGenerator()
-        for i in range(0, len(addresses)):
+        for i in range(0, len(managers)):
             row = reader.getRow()
-            manager = managers[random.getGaussianListRand(managers)]
+            manager = managers[i]
             storeId = IdGenerator.getId()
             manager.store_id = storeId
             managerId = manager.staff_id
             entities.append(Store(store_id=storeId,
                                   manager_staff_id=managerId,
                                   address_id=addresses[i].address_id,
-                                  last_update=row[reader.date] + " " + row[reader.time])
+                                  last_update="2006-02-15 09:45:30")
                             )
         return entities
