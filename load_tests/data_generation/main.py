@@ -30,7 +30,8 @@ LINES_IN_REQUEST = 5000 # 5000 MAX
 REQUESTS_COUNT = 2
 DATA_GENERATE_URL = "https://api.mockaroo.com/api/1d0bd460?count={}&key=1cdc7d30".format(LINES_IN_REQUEST)
 ## APPLICATION CONFIG ##
-
+ACTORS_COUNT=1000
+CITIES_COUNT=1000
 
 
 
@@ -38,7 +39,11 @@ DATA_GENERATE_URL = "https://api.mockaroo.com/api/1d0bd460?count={}&key=1cdc7d30
 #dataFetcher = DataFetcher(RESULTS_CSV_FILE, REQUESTS_COUNT, LINES_IN_REQUEST, DATA_GENERATE_URL)
 #dataFetcher.fetchData()
 csvWriter = CSVWriter()
-csvWriter.writeActors()
+csvWriter.writeActors(ACTORS_COUNT)
+csvWriter.writeCities(1000)
+csvWriter.writeAddresses(10000)
+csvWriter.writeStores(100)
+csvWriter.writeStaff(1000)
 logger.info("### APPLICAITON FINISHED ###")
 
 # except Exception as e:

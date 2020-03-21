@@ -1,17 +1,43 @@
 from dataclasses import dataclass
+from .idGenerator import IdGenerator
+from mockDataReader import MockDataReader
+from .randomNumberGenerator import RandomNumberGenerator
 
 
 @dataclass
 class Staff:
-    staff_id = None 
-    first_name = None 
-    last_name = None 
-    address_id = None 
-    email = None 
-    store_id = None 
-    active = None 
-    username = None 
-    password = None 
-    last_update = None 
-    picture = None 
+    staff_id: str
+    first_name: str
+    last_name: str
+    address_id: str
+    email: str
+    store_id: str
+    active: str
+    username: str
+    password: str
+    last_update: str
+    picture: str
 
+    def generate(addresses, stores, number, self=None):
+        entities = []
+        reader = MockDataReader()
+        random = RandomNumberGenerator()
+        for i in range(0, number):
+            row = reader.getRow()
+            storeId=0
+            if stores is not None:
+                storeId = stores[random.getGaussianListRand(stores)].store_id
+            isActive = random.flagRandom(0.95)
+            entities.append(Staff(staff_id=IdGenerator.getId(),
+                                  first_name=row[reader.first_name],
+                                  last_name=row[reader.last_name],
+                                  address_id=addresses[random.getListRandom(addresses)].address_id,
+                                  email=row[reader.email],
+                                  store_id=storeId,
+                                  active=isActive,
+                                  last_update=row[reader.date] + " " + row[reader.time],
+                                  password=row[reader.password],
+                                  picture=row[reader.password],
+                                  username=row[reader.login])
+                            )
+        return entities

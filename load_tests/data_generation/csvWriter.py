@@ -1,9 +1,15 @@
 import csv
 import logging
 from generators.actorGenerator import Actor
+from generators.staffGenerator import Staff
+from generators.addressGenerator import Address
+from generators.cityGenerator import City
+from generators.storeGenerator import Store
 
 import sys
+import math
 sys.path.append("..")
+
 
 class CSVWriter:
 
@@ -26,14 +32,33 @@ class CSVWriter:
             "store": "3081"
         }
 
+    actors = None
+
     def __init__(self):
         self.entityFilesMap = self.mapToFiles()
         self.logger = logging.getLogger('## app-log ##')
 
-    def writeActors(self):
-        actors = Actor.generate(number=1000)
-        self.writeToFile("actor", actors)
+    def writeCities(self, number):
+        self.cities = City.generate(number)
+        self.writeToFile("city", self.cities)
 
+    def writeAddresses(self, number):
+        self.addresses = Address.generate(cities=self.cities, number=number)
+        self.writeToFile("address", self.addresses)
+
+    def writeActors(self, number):
+        self.actors = Actor.generate(number=number)
+        self.writeToFile("actor", self.actors)
+
+    def writeStaff(self, number):
+        self.staff = Staff.generate(addresses=self.addresses, stores=self.stores, number=number)
+        self.writeToFile("staff", self.staff)
+
+    def writeStores(self, number):
+        managers = Staff.generate(addresses=self.addresses, stores= None, number=math.floor(number/2))
+        self.stores = Store.generate(addresses=self.addresses, managers=managers)
+        self.writeToFile("staff", managers)
+        self.writeToFile("store", self.stores)
 
     def writeToFile(self, entity, data):
         fileName = "./output/" + self.entityFilesMap.get(entity) + ".dat"
@@ -45,7 +70,7 @@ class CSVWriter:
             for line in data:
                 writer.writerow(vars(line).values())
             f.write("\.\r\n\r\n\r\n")
-        #self.deleteLastLine(fileName)
+        # self.deleteLastLine(fileName)
 
     def getClassProperties(self, obj):
         attrs = vars(obj).values()
@@ -63,4 +88,3 @@ class CSVWriter:
         for i in range(len(s)):
             fd.write(s[i])
         fd.close()
-

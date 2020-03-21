@@ -2,7 +2,7 @@ class MockDataReader:
 
     rowId = 0
 
-    data = None
+    __data = None
 
     first_name = 0
     last_name = 1
@@ -20,18 +20,20 @@ class MockDataReader:
     year = 13
 
     def __init__(self):
-        if MockDataReader.data is None:
+        if MockDataReader.__data is None:
             self.readCSV()
 
     def readCSV(self):
         with open("data.csv") as f:
-            self.data = f.readlines()
+            self.__data = f.readlines()
 
     def get(self):
-        return MockDataReader.data
+        return MockDataReader.__data
 
     def getRow(self):
         MockDataReader.rowId = MockDataReader.rowId + 1
-        return self.data[MockDataReader.rowId].split(',')
+        if MockDataReader.rowId == len(self.__data)-1:
+            MockDataReader.rowId = 0
+        return self.__data[MockDataReader.rowId].split(',')
 
 

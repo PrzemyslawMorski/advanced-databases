@@ -10,13 +10,13 @@ class Actor:
     last_name: str
     last_update: str
 
-    def generate(self=None, number=1):
-        actors = []
+    def generate(number,self=None):
+        entities = []
         reader = MockDataReader()
         for i in range(0, number):
             row = reader.getRow()
-            actors.append(Actor(actor_id=IdGenerator.getId(),
+            entities.append(Actor(actor_id=IdGenerator.getId(),
                                 first_name=row[reader.first_name],
                                 last_name=row[reader.last_name],
-                                last_update=row[reader.time]))
-        return actors
+                                last_update=row[reader.date] + " " + row[reader.time]))
+        return entities
