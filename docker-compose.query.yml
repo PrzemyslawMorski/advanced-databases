@@ -3,13 +3,13 @@ version: "2.1"
 services:
   query-runner:
     image: postgres
-    environment:
-      - PGPASSWORD=password
+    env_file: query_runner.env
     volumes:
-      - ./:/opt/dvdrental
+      - ./query.sql/:/opt/query.sql
+      - ./test_query.sh/:/opt/test_query.sh
     networks:
       - advanced-databases_dvd_rental_network
-    command: psql -h dvd_rental_db -p 5432 -U postgres -d dvdrental -w -a -f /opt/dvdrental/query.sql
+    command: /bin/bash /opt/test_query.sh
 
 networks:
   advanced-databases_dvd_rental_network:

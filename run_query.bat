@@ -1,1 +1,1 @@
-docker-compose -f docker-compose.query.yml up
+docker-compose -f docker-compose.query.yml run query-runner

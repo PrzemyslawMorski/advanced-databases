@@ -1,3 +1,3 @@
 EXPLAIN ANALYZE 
 SELECT * 
-FROM film;
+FROM film
