@@ -1,6 +1,7 @@
 from dataclasses import dataclass
-from .idGenerator import IdGenerator
+
 from mockDataReader import MockDataReader
+from .idGenerator import IdGenerator
 
 
 @dataclass

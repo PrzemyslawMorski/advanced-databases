@@ -1,10 +1,6 @@
 import urllib3
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 import requests
-from time import time
-import sys
-import json
-import csv
 import logging
 import re
 

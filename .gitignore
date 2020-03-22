@@ -1,6 +1,6 @@
 ~*.docx
-/load_tests/data_generation/__pycache__/*
-/load_tests/data_generation/venv/*
+/data_generation_script/__pycache__/*
+/data_generation_script/venv/*
 .idea
 logs
 ~*.pyc
