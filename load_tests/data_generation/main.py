@@ -1,13 +1,7 @@
 import urllib3
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
-import requests
-from time import time
 import sys
-import json
-import csv
 import logging
-import re
-from dataFetcher import DataFetcher
 from csvWriter import CSVWriter
 
 # LOGGING CONFIG
@@ -40,10 +34,17 @@ CITIES_COUNT=1000
 #dataFetcher.fetchData()
 csvWriter = CSVWriter()
 csvWriter.writeActors(ACTORS_COUNT)
-csvWriter.writeCities(1000)
-csvWriter.writeAddresses(10000)
-csvWriter.writeStores(100)
-csvWriter.writeStaff(1000)
+csvWriter.writeCities(10000)
+csvWriter.writeAddresses(100000)
+csvWriter.writeStores(1000)
+csvWriter.writeStaff(10000)
+csvWriter.writeActors(10000)
+csvWriter.writeStaff(10000)
+csvWriter.writeCustomers(100000)
+csvWriter.writeFilms(50000)
+csvWriter.writeInventories(100000)
+csvWriter.writeRentals(200000)
+csvWriter.writePayments(100000)
 logger.info("### APPLICAITON FINISHED ###")
 
 # except Exception as e:

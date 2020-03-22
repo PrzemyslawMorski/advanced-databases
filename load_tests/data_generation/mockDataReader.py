@@ -33,7 +33,7 @@ class MockDataReader:
     def getRow(self):
         MockDataReader.rowId = MockDataReader.rowId + 1
         if MockDataReader.rowId == len(self.__data)-1:
-            MockDataReader.rowId = 0
-        return self.__data[MockDataReader.rowId].split(',')
+            MockDataReader.rowId = 1
+        return self.__data[MockDataReader.rowId].replace("\n", "").split(',')
 
 

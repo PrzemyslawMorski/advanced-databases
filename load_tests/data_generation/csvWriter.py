@@ -1,13 +1,20 @@
 import csv
 import logging
+import sys
+
 from generators.actorGenerator import Actor
-from generators.staffGenerator import Staff
 from generators.addressGenerator import Address
 from generators.cityGenerator import City
+from generators.customerGenerator import Customer
+from generators.filmGenerator import Film
+from generators.film_actorGenerator import FilmActor
+from generators.film_categoryGenerator import FilmCategory
+from generators.inventoryGenerator import Inventory
+from generators.paymentGenerator import Payment
+from generators.rentalGenerator import Rental
+from generators.staffGenerator import Staff
 from generators.storeGenerator import Store
 
-import sys
-import math
 sys.path.append("..")
 
 
@@ -54,18 +61,44 @@ class CSVWriter:
         self.staff = Staff.generate(addresses=self.addresses, stores=self.stores, number=number)
         self.writeToFile("staff", self.staff)
 
+    def writeCustomers(self, number):
+        self.customers = Customer.generate(self.addresses, self.stores, number)
+        self.writeToFile("customer", self.customers)
+
     def writeStores(self, number):
-        managers = Staff.generate(addresses=self.addresses, stores= None, number=number)
+        managers = Staff.generate(addresses=self.addresses, stores=None, number=number)
         self.stores = Store.generate(addresses=self.addresses, managers=managers)
         self.writeToFile("staff", managers)
         self.writeToFile("store", self.stores)
+
+    def writeFilms(self, number):
+        self.films = Film.generate(number)
+        self.writeToFile("film", self.films)
+
+        self.film_categories = FilmCategory.generate(self.films)
+        self.writeToFile("film_category", self.film_categories)
+
+        self.film_actors = FilmActor.generate(self.films, self.actors)
+        self.writeToFile("film_actor", self.film_actors)
+
+    def writeInventories(self, number):
+        self.inventories = Inventory.generate(self.films, self.stores, number)
+        self.writeToFile("inventory", self.inventories)
+
+    def writeRentals(self, number):
+        self.rentals = Rental.generate(inventories=self.inventories, staffs=self.staff, customers=self.customers, number=number)
+        self.writeToFile("rental", self.rentals)
+
+    def writePayments(self, number):
+        self.payments = Payment.generate(staffs=self.staff, rentals=self.rentals, number=number)
+        self.writeToFile("payment", self.payments)
 
     def writeToFile(self, entity, data):
         fileName = "./output/" + self.entityFilesMap.get(entity) + ".dat"
         self.deleteLastLines(fileName)
         with open(fileName, 'a', newline='') as f:
             writer = csv.writer(f, delimiter="\t")
-            self.logger.info("SAVING RESULTS TO FILE")
+            self.logger.info("SAVING RESULTS TO FILE: {}".format(entity))
             f.write("\r\n")
             for line in data:
                 writer.writerow(vars(line).values())
