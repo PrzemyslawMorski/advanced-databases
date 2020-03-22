@@ -1,4 +1,3 @@
-EXPLAIN ANALYSE
 delete from
     store
 where

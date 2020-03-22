@@ -1,3 +1,2 @@
-EXPLAIN ANALYZE 
 SELECT * 
 FROM film

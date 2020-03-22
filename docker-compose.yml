@@ -47,5 +47,15 @@ services:
     networks:
       - dvd_rental_network
 
+  query_runner:
+    image: postgres
+    env_file: query_runner.env
+    volumes:
+      - ./query.sql/:/query.sql
+      - ./test_query.sh/:/test_query.sh
+    networks:
+      - dvd_rental_network
+    command: /bin/bash /test_query.sh
+
 networks:
   dvd_rental_network:

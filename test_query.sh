@@ -1,29 +1,14 @@
 #!/bin/bash
-
-SUM_EXECUTION_TIME=$(awk "BEGIN {print 0.0; exit}")
-SUM_PLANNING_TIME=$(awk "BEGIN {print 0.0; exit}")
-
-counter=0
-while [ $counter -lt $NUM_TESTS ]
+sum_runtime=`awk "BEGIN {print 0; exit}"`
+for i in $(seq 1 $NUM_TESTS)
 do
-    OUTPUT="$(psql -h dvd_rental_db -p 5432 -U postgres -d dvdrental -w -a -f /opt/query.sql)"
-    
-    EXECUTION_TIME="$(echo $OUTPUT | grep -o -e 'Execution Time: \S* ms' | grep -o -e '[0-9]*[.][0-9]*')"
-    PLANNING_TIME="$(echo $OUTPUT | grep -o -e 'Planning Time: \S* ms' | grep -o -e '[0-9]*[.][0-9]*')"
-    
-    if [ -n "$EXECUTION_TIME" ]; then
-        if [ -n "$EXECUTION_TIME" ]; then
-            SUM_EXECUTION_TIME=$(awk "BEGIN {print $SUM_EXECUTION_TIME+$EXECUTION_TIME; exit}")
-            SUM_PLANNING_TIME=$(awk "BEGIN {print $SUM_PLANNING_TIME+$PLANNING_TIME; exit}")
-            counter=$(( $counter + 1 ))
-        fi
-    fi
+    cp /query.sql /query_$i.sql
+    start=`date +%s%3N`
+    output="$(psql -h dvd_rental_db -p 5432 -U postgres -d dvdrental -w -a -f /query_$i.sql)"
+    end=`date +%s%3N`
+    runtime=`awk "BEGIN {print $end-$start; exit}"`
+    echo $runtime
+    sum_runtime=$(awk "BEGIN {print $sum_runtime+$runtime; exit}")
 done
-
-AVG_EXECUTION_TIME=$(awk "BEGIN {print $SUM_EXECUTION_TIME/$NUM_TESTS; exit}")
-AVG_PLANNING_TIME=$(awk "BEGIN {print $SUM_PLANNING_TIME/$NUM_TESTS; exit}")
-
-echo "AVG_EXECUTION_TIME - $AVG_EXECUTION_TIME ms"
-echo "AVG_PLANNING_TIME - $AVG_PLANNING_TIME ms"
-
-exit 0
+AVG_runtime=$(awk "BEGIN {print $sum_runtime/$NUM_TESTS; exit}")
+echo "AVG_runtime - $AVG_runtime ms"
