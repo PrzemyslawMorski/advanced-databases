@@ -33,7 +33,7 @@ services:
         condition: service_healthy
     networks:
       - dvd_rental_network
-    command: /migrator_volume/restore.sh
+    command: bash -c "psql -h dvd_rental_db -p 5432 -U postgres -w -a -f /migrator_volume/restore.sql && sh /migrator_volume/restore.sh"
 
   pgadmin:
     image: dpage/pgadmin4
