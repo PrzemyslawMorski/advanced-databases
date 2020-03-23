@@ -10,7 +10,6 @@ services:
       - ./:/dvdrental
     networks:
       - advanced-databases_dvd_rental_network
-    # command: cat /dvdrental/test_query_using_explain.sh
     command: /bin/bash /dvdrental/test_query_using_time_diff.sh
     # command: /bin/bash /dvdrental/test_query_using_explain.sh
 
