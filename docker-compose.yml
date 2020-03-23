@@ -46,20 +46,5 @@ services:
     networks:
       - dvd_rental_network
 
-  # query_runner:
-  #   image: postgres
-  #   environment:
-  #     - NUM_TESTS=10
-  #     - PGPASSWORD=password
-  #   volumes:
-  #     - ./query_runner_volume:/dvdrental
-  #   depends_on:
-  #     database:
-  #       condition: service_healthy
-  #   networks:
-  #     - dvd_rental_network
-  #   command: /bin/bash /dvdrental/test_query_using_time_diff.sh
-  # command: /bin/bash /dvdrental/test_query_using_explain.sh
-
 networks:
   dvd_rental_network:
