@@ -1,4 +1,3 @@
-psql -h dvd_rental_db -p 5432 -U postgres -w -a -f /migrator_volume/restore.sql
 psql -h dvd_rental_db -p 5432 -U postgres -d dvdrental -h dvd_rental_db -p 5432 -U postgres -d dvdrental -c '\copy public.actor (actor_id, first_name, last_name, last_update) from /migrator_volume/3057.dat'
 psql -h dvd_rental_db -p 5432 -U postgres -d dvdrental -c '\copy public.country (country_id, country, last_update) from /migrator_volume/3069.dat'
 psql -h dvd_rental_db -p 5432 -U postgres -d dvdrental -c '\copy public.city (city_id, city, country_id, last_update) from /migrator_volume/3067.dat'
