@@ -1,1 +1,1 @@
-docker-compose run query_runner
+docker-compose run database /test_query.sh

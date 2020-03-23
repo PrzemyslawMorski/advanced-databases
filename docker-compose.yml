@@ -8,12 +8,7 @@ services:
     image: postgres
     ports:
       - 5432:5432
-    environment:
-      - PGPASSWORD=password
-      - POSTGRES_PASSWORD=password
-      - POSTGRES_HOST_AUTH_METHOD=trust
-    volumes:
-      - ./dvdrental:/opt/dvdrental
+    env_file: dvd_rental_db.env
     networks:
       - dvd_rental_network
     mem_limit: 300m
@@ -28,13 +23,13 @@ services:
     environment:
       - PGPASSWORD=password
     volumes:
-      - ./dvdrental:/opt/dvdrental
+      - ./migrator_volume:/opt/dvdrental
     depends_on:
       database:
         condition: service_healthy
     networks:
       - dvd_rental_network
-    command: psql -h dvd_rental_db -p 5432 -U postgres -w -a -f /opt/dvdrental/restore.sql
+    command: /bin/bash /opt/dvdrental/restore.sh
 
   pgadmin:
     image: dpage/pgadmin4
@@ -46,16 +41,6 @@ services:
       - PGADMIN_DEFAULT_PASSWORD=admin
     networks:
       - dvd_rental_network
-
-  query_runner:
-    image: postgres
-    env_file: query_runner.env
-    volumes:
-      - ./query.sql/:/query.sql
-      - ./test_query.sh/:/test_query.sh
-    networks:
-      - dvd_rental_network
-    command: /bin/bash /test_query.sh
 
 networks:
   dvd_rental_network:
