@@ -4,7 +4,7 @@ services:
   query_runner:
     image: query_runner
     build:
-      context: .
+      context: container_build
     environment:
       - NUM_TESTS=10
       - PGPASSWORD=password
