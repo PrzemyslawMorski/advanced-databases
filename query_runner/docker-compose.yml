@@ -2,7 +2,9 @@ version: "2.1"
 
 services:
   query_runner:
-    image: postgres
+    image: query_runner
+    build:
+      context: .
     environment:
       - NUM_TESTS=10
       - PGPASSWORD=password
@@ -10,8 +12,6 @@ services:
       - ./:/dvdrental
     networks:
       - advanced-databases_dvd_rental_network
-    # command: /bin/bash /dvdrental/test_query_using_time_diff.sh
-    command: /bin/bash /dvdrental/test_query_using_explain.sh
 
 networks:
   advanced-databases_dvd_rental_network:

@@ -6,3 +6,5 @@ logs
 *.pyc
 
 data.csv
+
+.vscode
