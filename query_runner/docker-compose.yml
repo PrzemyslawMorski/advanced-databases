@@ -6,8 +6,12 @@ services:
     build:
       context: container_build
     environment:
-      - NUM_TESTS=10
-      - PGPASSWORD=password
+      - DB_HOSTNAME=dvd_rental_db
+      - DB_USER=postgres
+      - DB_PASSWORD=dvd_rental_db
+      - DB_DATABASE_NAME=dvdrental
+      - DB_QUERY_FILE=/dvdrental/query.sql
+      - DB_NUM_TESTS=10
     volumes:
       - ./:/dvdrental
     networks:
