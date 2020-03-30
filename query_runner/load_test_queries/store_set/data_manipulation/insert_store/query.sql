@@ -1,10 +1,62 @@
+with inserted_stores as (
+    insert into
+        store (store_id, manager_staff_id, address_id)
+    select
+        generated,
+        (
+            select
+                staff_id
+            from
+                staff
+            order by
+                random()
+            limit
+                1
+        ), (
+            select
+                address_id
+            from
+                address
+            order by
+                random()
+            limit
+                1
+        )
+    from
+        generate_series(300000, 340000) as generated returning *
+)
 insert into
-    store (store_id, manager_staff_id, address_id)
+    inventory(inventory_id, film_id, store_id)
 select
     generated,
-    (select staff_id from staff order by random() limit 1),
-    (select address_id from address order by random() limit 1)
+    (
+        select
+            film_id
+        from
+            film
+        order by
+            random()
+        limit
+            1
+    ), (
+        select
+            store_id
+        from
+            store
+        order by
+            random()
+        limit
+            1
+    )
 from
-    generate_series(300000, 305000) as generated;
+    generate_series(500000, 540000) as generated;
 
-delete from store s where s.store_id >= 300000;
+delete from
+    inventory
+where
+    inventory_id >= 500000;
+
+delete from
+    store
+where
+    store_id >= 300000;
