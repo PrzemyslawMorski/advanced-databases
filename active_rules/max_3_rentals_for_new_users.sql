@@ -18,7 +18,7 @@ $$BEGIN
       RAISE EXCEPTION 'Sorry, as a new user you cannot rent more than 3 films';
    END IF;
  
-   RETURN OLD;
+   RETURN NEW;
 END;$$;
  
 DROP TRIGGER IF EXISTS checkout_trig ON public.rental;
