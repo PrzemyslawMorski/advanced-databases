@@ -1,0 +1,13 @@
+{
+    "Servers": {
+        "Postgres": {
+            "Name": "Dvd rental",
+            "Port": 5432,
+            "Group": "Servers",
+            "SSLMode": "prefer",
+            "Username": "postgres",
+            "Host": "dvd_rental_db",
+            "MaintenanceDB": "postgres"
+        }
+    }
+}
