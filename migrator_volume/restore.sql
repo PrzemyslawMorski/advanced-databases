@@ -280,7 +280,7 @@ SET default_with_oids = false;
 --
 
 CREATE TABLE public.customer (
-    customer_id integer DEFAULT nextval('public.customer_customer_id_seq'::regclass) NOT NULL,
+    customer_id serial NOT NULL,
     store_id integer NOT NULL,
     first_name character varying(45) NOT NULL,
     last_name character varying(45) NOT NULL,
@@ -390,7 +390,7 @@ ALTER TABLE public.actor_actor_id_seq OWNER TO postgres;
 --
 
 CREATE TABLE public.actor (
-    actor_id integer DEFAULT nextval('public.actor_actor_id_seq'::regclass) NOT NULL,
+    actor_id serial NOT NULL,
     first_name character varying(45) NOT NULL,
     last_name character varying(45) NOT NULL,
     last_update timestamp without time zone DEFAULT now() NOT NULL
@@ -418,7 +418,7 @@ ALTER TABLE public.category_category_id_seq OWNER TO postgres;
 --
 
 CREATE TABLE public.category (
-    category_id integer DEFAULT nextval('public.category_category_id_seq'::regclass) NOT NULL,
+    category_id serial NOT NULL,
     name character varying(25) NOT NULL,
     last_update timestamp without time zone DEFAULT now() NOT NULL
 );
@@ -445,7 +445,7 @@ ALTER TABLE public.film_film_id_seq OWNER TO postgres;
 --
 
 CREATE TABLE public.film (
-    film_id integer DEFAULT nextval('public.film_film_id_seq'::regclass) NOT NULL,
+    film_id serial NOT NULL,
     title character varying(255) NOT NULL,
     description text,
     release_year public.year,
@@ -531,7 +531,7 @@ ALTER TABLE public.address_address_id_seq OWNER TO postgres;
 --
 
 CREATE TABLE public.address (
-    address_id integer DEFAULT nextval('public.address_address_id_seq'::regclass) NOT NULL,
+    address_id serial NOT NULL,
     address character varying(100) NOT NULL,
     address2 character varying(50),
     district character varying(20) NOT NULL,
@@ -563,7 +563,7 @@ ALTER TABLE public.city_city_id_seq OWNER TO postgres;
 --
 
 CREATE TABLE public.city (
-    city_id integer DEFAULT nextval('public.city_city_id_seq'::regclass) NOT NULL,
+    city_id serial NOT NULL,
     city character varying(50) NOT NULL,
     country_id integer NOT NULL,
     last_update timestamp without time zone DEFAULT now() NOT NULL
@@ -591,7 +591,7 @@ ALTER TABLE public.country_country_id_seq OWNER TO postgres;
 --
 
 CREATE TABLE public.country (
-    country_id integer DEFAULT nextval('public.country_country_id_seq'::regclass) NOT NULL,
+    country_id serial NOT NULL,
     country character varying(50) NOT NULL,
     last_update timestamp without time zone DEFAULT now() NOT NULL
 );
@@ -666,7 +666,7 @@ ALTER TABLE public.inventory_inventory_id_seq OWNER TO postgres;
 --
 
 CREATE TABLE public.inventory (
-    inventory_id integer DEFAULT nextval('public.inventory_inventory_id_seq'::regclass) NOT NULL,
+    inventory_id serial NOT NULL,
     film_id integer NOT NULL,
     store_id integer NOT NULL,
     last_update timestamp without time zone DEFAULT now() NOT NULL
@@ -694,7 +694,7 @@ ALTER TABLE public.language_language_id_seq OWNER TO postgres;
 --
 
 CREATE TABLE public.language (
-    language_id integer DEFAULT nextval('public.language_language_id_seq'::regclass) NOT NULL,
+    language_id serial NOT NULL,
     name character(20) NOT NULL,
     last_update timestamp without time zone DEFAULT now() NOT NULL
 );
@@ -744,7 +744,7 @@ ALTER TABLE public.payment_payment_id_seq OWNER TO postgres;
 --
 
 CREATE TABLE public.payment (
-    payment_id integer DEFAULT nextval('public.payment_payment_id_seq'::regclass) NOT NULL,
+    payment_id serial NOT NULL,
     customer_id integer NOT NULL,
     staff_id integer NOT NULL,
     rental_id integer NOT NULL,
@@ -774,7 +774,7 @@ ALTER TABLE public.rental_rental_id_seq OWNER TO postgres;
 --
 
 CREATE TABLE public.rental (
-    rental_id integer DEFAULT nextval('public.rental_rental_id_seq'::regclass) NOT NULL,
+    rental_id serial NOT NULL,
     rental_date timestamp without time zone NOT NULL,
     inventory_id integer NOT NULL,
     customer_id integer NOT NULL,
@@ -824,7 +824,7 @@ ALTER TABLE public.staff_staff_id_seq OWNER TO postgres;
 --
 
 CREATE TABLE public.staff (
-    staff_id integer DEFAULT nextval('public.staff_staff_id_seq'::regclass) NOT NULL,
+    staff_id serial NOT NULL,
     first_name character varying(45) NOT NULL,
     last_name character varying(45) NOT NULL,
     address_id integer NOT NULL,
@@ -859,7 +859,7 @@ ALTER TABLE public.store_store_id_seq OWNER TO postgres;
 --
 
 CREATE TABLE public.store (
-    store_id integer DEFAULT nextval('public.store_store_id_seq'::regclass) NOT NULL,
+    store_id serial NOT NULL,
     manager_staff_id integer NOT NULL,
     address_id integer NOT NULL,
     last_update timestamp without time zone DEFAULT now() NOT NULL
@@ -1231,7 +1231,7 @@ CREATE INDEX idx_title ON public.film USING btree (title);
 -- Name: idx_unq_manager_staff_id; Type: INDEX; Schema: public; Owner: postgres
 --
 
-CREATE UNIQUE INDEX idx_unq_manager_staff_id ON public.store USING btree (manager_staff_id);
+CREATE INDEX idx_unq_manager_staff_id ON public.store USING btree (manager_staff_id);
 
 
 --
