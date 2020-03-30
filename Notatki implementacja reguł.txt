@@ -1,0 +1,14 @@
+Próbka obci¹¿enia ma wykonaæ te same operacje co przed aktywn¹ regu³¹. Skutek ma byæ ten sam.
+
+Przyk³ad:
+Zmiana wynagrodzenia pracownika -> przeliczenie jego premii
+
+Nowa próbka obci¹¿enia jeœli przeliczenie premii jako aktywna regu³a -> testowane tylko zmiana wynagrodzenia
+
+Logicznie jest to samo, ale aktywna regu³a oszczêdza obliczeñ. Sekwencyjne vs zdarzeniowe w oparciu o aktywne regu³y.
+
+
+Wa¿ne:
+3 aktywne regu³y maj¹ byæ zwi¹zane z próbk¹ obci¹¿enia.
+
+W sprawozdaniu wnioski.
