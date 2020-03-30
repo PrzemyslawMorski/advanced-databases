@@ -2,56 +2,62 @@ BEGIN;
 
 SAVEPOINT save;
 
-delete from
-	payment p
-where
-	p.rental_id in (
+with inserted_films as (
+	insert into
+		film (
+			film_id,
+			title,
+			description,
+			release_year,
+			language_id,
+			rental_duration,
+			rental_rate,
+			length,
+			replacement_cost,
+			rating
+		)
+	select
+		generated,
+		random() :: text,
+		random() :: text,
+		2015,
+		(
+			select
+				language_id
+			from
+				language
+			order by
+				random()
+			limit
+				1
+		), 6, random() :: numeric(4, 2), random(), random() :: numeric(5, 2), 'NC-17'
+	from
+		generate_series(300000, 340000) as generated returning *
+)
+insert into
+	film_actor(film_id, actor_id)
+select
+	(
 		select
-			r.rental_id
+			film_id
 		from
-			rental r
-		where
-			r.inventory_id in (
-				select
-					i.inventory_id
-				from
-					inventory i
-				where
-					i.film_id = 1
-			)
-	);
-
-delete from
-	film_actor fa
-where
-	fa.film_id = 1;
-
-delete from
-	rental r
-where
-	r.inventory_id in (
+			inserted_films
+		order by
+			random()
+		limit
+			1
+	), actors.actor_id
+from
+	(
 		select
-			i.inventory_id
+			actor_id
 		from
-			inventory i
-		where
-			i.film_id = 1
-	);
-
-delete from
-	inventory i
-where
-	i.film_id = 1;
-
-delete from
-	film_category fc
-where
-	fc.film_id = 1;
-
-delete from
-	film f
-where
-	f.film_id = 1;
+			actor
+		order by
+			random()
+		limit
+			1
+	) as actors;
 
 ROLLBACK TO SAVEPOINT save;
 

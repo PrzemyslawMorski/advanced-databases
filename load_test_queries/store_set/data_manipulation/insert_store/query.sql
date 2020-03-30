@@ -55,16 +55,6 @@ select
 from
     generate_series(500000, 540000) as generated;
 
-delete from
-    inventory
-where
-    inventory_id >= 500000;
-
-delete from
-    store
-where
-    store_id >= 300000;
-
 ROLLBACK TO SAVEPOINT save;
 
 COMMIT;
