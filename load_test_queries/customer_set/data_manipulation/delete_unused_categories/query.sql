@@ -1,3 +1,7 @@
+BEGIN;
+
+SAVEPOINT save;
+
 delete from
     category c
 where
@@ -6,4 +10,8 @@ where
             category_id
         from
             film_category
-    )
+    );
+
+ROLLBACK TO SAVEPOINT save;
+
+COMMIT;

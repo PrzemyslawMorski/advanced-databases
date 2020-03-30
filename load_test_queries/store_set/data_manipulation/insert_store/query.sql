@@ -1,3 +1,7 @@
+BEGIN;
+
+SAVEPOINT save;
+
 with inserted_stores as (
     insert into
         store (store_id, manager_staff_id, address_id)
@@ -60,3 +64,7 @@ delete from
     store
 where
     store_id >= 300000;
+
+ROLLBACK TO SAVEPOINT save;
+
+COMMIT;

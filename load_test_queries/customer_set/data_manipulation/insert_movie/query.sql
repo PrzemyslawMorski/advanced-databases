@@ -1,3 +1,7 @@
+BEGIN;
+
+SAVEPOINT save;
+
 delete from
 	payment p
 where
@@ -48,3 +52,7 @@ delete from
 	film f
 where
 	f.film_id = 1;
+
+ROLLBACK TO SAVEPOINT save;
+
+COMMIT;

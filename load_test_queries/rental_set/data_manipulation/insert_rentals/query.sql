@@ -1,0 +1,8 @@
+BEGIN;
+
+SAVEPOINT save;
+
+ROLLBACK TO SAVEPOINT save;
+
+COMMIT;
+

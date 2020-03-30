@@ -1,3 +1,7 @@
+BEGIN;
+
+SAVEPOINT save;
+
 delete from
     rental r
 where
@@ -12,3 +16,7 @@ delete from
     customer c
 where
     c.customer_id = 1;
+
+ROLLBACK TO SAVEPOINT save;
+
+COMMIT;
