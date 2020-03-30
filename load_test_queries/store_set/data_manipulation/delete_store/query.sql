@@ -11,7 +11,7 @@ with staff_to_delete as (
         join address ad on st.address_id = ad.address_id
     where
         district LIKE 'Cal'
-        and last_update < '2006-02-15 09:45:30'
+        and st.last_update < '2006-02-15 09:45:30'
 )
 update
     payment
@@ -37,7 +37,7 @@ where
             join address ad on st.address_id = ad.address_id
         where
             district LIKE 'Cal'
-            and last_update < '2006-02-15 09:45:30'
+            and st.last_update < '2006-02-15 09:45:30'
     );
 
 delete from
@@ -51,7 +51,7 @@ where
             join address ad on st.address_id = ad.address_id
         where
             district LIKE 'Cal'
-            and last_update < '2006-02-15 09:45:30'
+            and st.last_update < '2006-02-15 09:45:30'
     );
 
 ROLLBACK TO SAVEPOINT save;
