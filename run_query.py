@@ -1,15 +1,16 @@
 #!/usr/bin/python
 
 import os
+import sys
 import psycopg2
 from timeit import default_timer as timer
 
-hostname = os.environ['DB_HOSTNAME']
-username = os.environ['DB_USER']
-password = os.environ['DB_PASSWORD']
-database = os.environ['DB_DATABASE_NAME']
-query_file = os.environ['DB_QUERY_FILE']
-num_tests = int(os.environ['DB_NUM_TESTS'])
+hostname = 'localhost'
+username = 'postgres'
+password = 'password'
+database = 'dvdrental'
+query_file = sys.argv[1]
+num_tests = int(sys.argv[2])
 
 def measure_performance(connection, query):
     sum_execution_time = 0
