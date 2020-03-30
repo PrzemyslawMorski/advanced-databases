@@ -745,7 +745,7 @@ ALTER TABLE public.payment_payment_id_seq OWNER TO postgres;
 
 CREATE TABLE public.payment (
     payment_id serial NOT NULL,
-    customer_id integer NOT NULL,
+    customer_id integer,
     staff_id integer NOT NULL,
     rental_id integer NOT NULL,
     amount numeric(5,2) NOT NULL,
@@ -777,7 +777,7 @@ CREATE TABLE public.rental (
     rental_id serial NOT NULL,
     rental_date timestamp without time zone NOT NULL,
     inventory_id integer NOT NULL,
-    customer_id integer NOT NULL,
+    customer_id integer,
     return_date timestamp without time zone,
     staff_id integer NOT NULL,
     last_update timestamp without time zone DEFAULT now() NOT NULL
