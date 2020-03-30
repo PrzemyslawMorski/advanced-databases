@@ -14,7 +14,7 @@ services:
       - POSTGRES_HOST_AUTH_METHOD=trust
     networks:
       - dvd_rental_network
-    mem_limit: 300m
+    mem_limit: 100m
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U postgres"]
       interval: 10s
