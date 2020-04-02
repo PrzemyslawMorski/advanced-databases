@@ -46,8 +46,8 @@ def run_test(query_path, num_tests):
 
 
 # setup
-restore_db()
+# restore_db()
 
-for path in glob.iglob('load_test_queries/**', recursive=True):
+for path in glob.iglob('tmp_tests/**', recursive=True):
     if (Path(path).name.endswith('.sql')):
         run_test(path, 10)

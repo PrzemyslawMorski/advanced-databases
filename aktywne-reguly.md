@@ -42,3 +42,6 @@ Do implementacji:
 4) Dodanie zniżki dla użytkownika, który wypożyczył ponad 10 filmów
 6) dodajac nowy film zaktualizuj wszystkie inne z tej samej kategorii zmniejszajac ich replacement cost o 1%
 7) po dodaniu wypożyczenia - zwiększ rental rate o 1%
+
+Testy aktywnych reguł:
+6) Bez reguły - 4.2290081100000005 s Z regułą - 4.46200243 s
