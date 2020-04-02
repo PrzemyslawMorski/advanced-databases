@@ -41,4 +41,4 @@ Do implementacji:
 2) Zablokowanie możliwości wypożyczenia więcej niż 3 filmów dla użytkownika, który jest utworzony mniej niż rok temu
 4) Dodanie zniżki dla użytkownika, który wypożyczył ponad 10 filmów
 6) dodajac nowy film zaktualizuj wszystkie inne z tej samej kategorii zmniejszajac ich replacement cost o 1%
-7) po dodaniu wypożyczenia - zwiększ rental rate o 1%, po usunięciu 1%
+7) po dodaniu wypożyczenia - zwiększ rental rate o 1%
