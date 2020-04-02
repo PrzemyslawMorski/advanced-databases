@@ -749,7 +749,7 @@ CREATE TABLE public.payment (
     staff_id integer NOT NULL,
     rental_id integer NOT NULL,
     amount numeric(5,2) NOT NULL,
-    payment_date timestamp without time zone NOT NULL
+    payment_date timestamp without time zone
 );
 
 

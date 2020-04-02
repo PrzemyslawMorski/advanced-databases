@@ -2,17 +2,17 @@ CREATE OR REPLACE FUNCTION public.check_rental_insert_of_new_customer() RETURNS 
    LANGUAGE plpgsql AS
 $$BEGIN
 	raise notice 'Value: %', NEW.customer_id;
-	IF (select count(customer_id) from customer where customer_id = 400000 and date_part('year',age('2020-02-14', CURRENT_DATE)) < 1) = 1 THEN
+	IF (select count(customer_id) from customer where customer_id = NEW.customer_id and date_part('year',age(CURRENT_DATE, create_date)) < 1) = 1 THEN
 		RAISE NOTICE 'NOWY USER';
 	END IF;
 	
-	IF (SELECT count(r.rental_id) FROM public.rental r join public.customer c on r.customer_id = c.customer_id where c.customer_id = 400000 and 
+	IF (SELECT count(r.rental_id) FROM public.rental r join public.customer c on r.customer_id = c.customer_id where c.customer_id = NEW.customer_id and 
 		r.return_date is null) > 3 THEN
 		RAISE NOTICE 'WIECEJ NIZ 3 WYPOZYCZENIA';
 	END IF;
 	
-	IF (select count(customer_id) from customer where customer_id = 400000 and date_part('year',age('2020-02-14', CURRENT_DATE)) < 1) = 1 and   
-   (SELECT count(r.rental_id) FROM public.rental r join public.customer c on r.customer_id = c.customer_id where c.customer_id = 400000 and 
+	IF (select count(customer_id) from customer where customer_id = NEW.customer_id and date_part('year',age(CURRENT_DATE, create_date)) < 1) = 1 and   
+   (SELECT count(r.rental_id) FROM public.rental r join public.customer c on r.customer_id = c.customer_id where c.customer_id = NEW.customer_id and 
 		r.return_date is null) > 3
    THEN
       RAISE EXCEPTION 'Sorry, as a new user you cannot rent more than 3 films';

@@ -1,0 +1,1 @@
+select * from payment where customer_id = 405000;
