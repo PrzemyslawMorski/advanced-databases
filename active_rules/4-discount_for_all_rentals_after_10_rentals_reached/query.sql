@@ -1,10 +1,6 @@
 CREATE OR REPLACE FUNCTION public.grant_discount_if_has_multiple_of_10_payments() RETURNS trigger
    LANGUAGE plpgsql AS
 $$BEGIN
-	
-	IF (SELECT count(p.payment_id) FROM public.payment p where customer_id = NEW.customer_id) % 10 = 0 THEN
-		RAISE NOTICE 'WIELOKROTNOŚĆ 10 WYPOZYCZEŃ';
-	END IF;
 
    IF (SELECT count(p.payment_id) FROM public.payment p where customer_id = NEW.customer_id) % 10 = 0 THEN
 		UPDATE payment SET amount = amount * 0.90 WHERE payment_id = NEW.payment_id;

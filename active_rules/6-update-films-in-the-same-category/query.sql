@@ -1,7 +1,6 @@
 CREATE OR REPLACE FUNCTION public.dcrs_flm_rplcmnt_cst_insrt_flm_frm_sm_ctgry() RETURNS trigger
    LANGUAGE plpgsql AS
 $$BEGIN
-    RAISE NOTICE 'ZMNIEJSZENIE KOSZTU WYMIANY FILMOW Z KATEGORII DODANEGO FILMU';
 
 	UPDATE film SET replacement_cost = replacement_cost * 0.99 WHERE film_id in (
         SELECT DISTINCT f.film_id FROM film f JOIN film_category fc ON f.film_id = fc.film_id 
