@@ -1,0 +1,6 @@
+1) test kolejnosci uruchamiania triggerrow
+2) test glebokosci uruchamiania triggerrow? rekurencja - test przepelnienia stosu
+3) test uruchomienia regul niezwiazanych z probka obciazenia
+    - regula czasowa
+    - check constraint
+4) trigger 2 etapowy

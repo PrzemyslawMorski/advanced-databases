@@ -1,0 +1,6 @@
+Running: triggers_tests\add_film_category_relation.sql
+AVERAGE EXECUTION TIME FOR 10 TESTS: 4.5108095200000005 s
+Running: triggers_tests\add_film_inventory.sql
+AVERAGE EXECUTION TIME FOR 10 TESTS: 1.0110682600000025 s
+Running: triggers_tests\add_rental.sql
+AVERAGE EXECUTION TIME FOR 10 TESTS: 0.5113781700000004 s

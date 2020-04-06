@@ -451,7 +451,7 @@ CREATE TABLE public.film (
     release_year public.year,
     language_id integer NOT NULL,
     rental_duration integer DEFAULT 3 NOT NULL,
-    rental_rate numeric(4,2) DEFAULT 4.99 NOT NULL,
+    rental_rate numeric(5,2) DEFAULT 4.99 NOT NULL,
     length integer,
     replacement_cost numeric(5,2) DEFAULT 19.99 NOT NULL,
     rating public.mpaa_rating DEFAULT 'G'::public.mpaa_rating,
@@ -1493,4 +1493,3 @@ ALTER TABLE ONLY public.store
 --
 -- PostgreSQL database dump complete
 --
-

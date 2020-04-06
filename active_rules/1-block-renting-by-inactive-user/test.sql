@@ -75,7 +75,3 @@ values
         706001,
         1
     );
-
-
-
-select * from customer where customer_id = 706001;

@@ -13,7 +13,7 @@ $$BEGIN
    RETURN NEW;
 END;$$;
  
-DROP TRIGGER IF EXISTS payment_trig ON public.rental;
+DROP TRIGGER IF EXISTS payment_trig ON public.payment;
  
 CREATE CONSTRAINT TRIGGER payment_trig
    AFTER INSERT ON public.payment
