@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="ISO-8859-2"?>
+<xsd:schemaxmlns:xsd="http://www.w3.org/2001/XMLSchema"
+targetNamespace="http://www.pwr.edu.pl/adb"
+xmlns="http://www.pwr.edu.pl/adb"
+elementFormDefault="qualified” version="1.1">
+<xsd:includeschemaLocation=„adb.xsd"/>
+<xsd:elementname=„depts">
+<xsd:complexType>
+<xsd:sequence>
+<xsd:elementref=„dept"
+minOccurs="1"
+maxOccurs="unbounded"/>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+<xsd:elementname=„dept">
+<xsd:complexType>
+<xsd:attributeGroupref="ids"/>
+<xsd:sequence>
+<xsd:elementname="dname"
+type:"xsd.string"/>
+<xsd:elementname="loc"
+type:"xsd.string"/>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+<xsd:attributeGroupname="ids">
+<xsd:attributename="deptno"
+type="xsd:Name" use="required"/>
+</xsd:attributeGroup>
+</xsd:schema>
