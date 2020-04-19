@@ -2,9 +2,8 @@
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
     <xs:complexType name="actors">
         <xs:sequence minOccurs="1" maxOccurs="unbounded">
-            <xs:element name="actor_id" type="xs:positiveInteger" />
-            <xs:element name="actor_name" type="xs:string" />
-            <xs:element name="actor_email" type="xs:string" />
+            <xs:element name="first_name" type="xs:string" />
+            <xs:element name="last_name" type="xs:string" />
         </xs:sequence>
     </xs:complexType>
 </xs:schema>

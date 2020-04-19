@@ -1,31 +1,12 @@
-<?xml version="1.0" encoding="ISO-8859-2"?>
-<xsd:schemaxmlns:xsd="http://www.w3.org/2001/XMLSchema"
-targetNamespace="http://www.pwr.edu.pl/adb"
-xmlns="http://www.pwr.edu.pl/adb"
-elementFormDefault="qualified” version="1.1">
-<xsd:includeschemaLocation=„adb.xsd"/>
-<xsd:elementname=„depts">
-<xsd:complexType>
-<xsd:sequence>
-<xsd:elementref=„dept"
-minOccurs="1"
-maxOccurs="unbounded"/>
-</xsd:sequence>
-</xsd:complexType>
-</xsd:element>
-<xsd:elementname=„dept">
-<xsd:complexType>
-<xsd:attributeGroupref="ids"/>
-<xsd:sequence>
-<xsd:elementname="dname"
-type:"xsd.string"/>
-<xsd:elementname="loc"
-type:"xsd.string"/>
-</xsd:sequence>
-</xsd:complexType>
-</xsd:element>
-<xsd:attributeGroupname="ids">
-<xsd:attributename="deptno"
-type="xsd:Name" use="required"/>
-</xsd:attributeGroup>
-</xsd:schema>
+<?xml version="1.0" ?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xs:complexType name="rentals">
+        <xs:sequence minOccurs="1" maxOccurs="unbounded">
+            <xs:element name="rental_id" type="xs:positiveInteger" />
+            <xs:element name="store_address" type="xs:string" />
+            <xs:element name="film_title" type="xs:string" />
+            <xs:element name="customer_name" type="xs:string" />
+            <xs:element name="customer_email" type="xs:string" />
+        </xs:sequence>
+    </xs:complexType>
+</xs:schema>

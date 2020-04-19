@@ -1,0 +1,11 @@
+<?xml version="1.0" ?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xs:complexType name="change_history">
+        <xs:sequence minOccurs="1" maxOccurs="unbounded">
+            <xs:element name="change_date" type="xs:dateTime" />
+            <xs:element name="field_name" type="xs:string" />
+            <xs:element name="old_value" type="xs:string" />
+            <xs:element name="new_value" type="xs:string" />
+        </xs:sequence>
+    </xs:complexType>
+</xs:schema>
