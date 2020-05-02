@@ -1,0 +1,15 @@
+BEGIN;
+
+SAVEPOINT save;
+
+DO
+$do$
+BEGIN 
+
+
+END
+$do$;
+
+ROLLBACK TO SAVEPOINT save;
+
+COMMIT;
