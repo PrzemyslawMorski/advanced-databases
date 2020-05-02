@@ -6,16 +6,33 @@ DO
 $do$
 BEGIN 
 
-    INSERT INTO film_actor (film_id, actor_id) VALUES (1,3);
-    INSERT INTO film_actor (film_id, actor_id) VALUES (1,5);
-    INSERT INTO film_actor (film_id, actor_id) VALUES (1,7);
-    INSERT INTO film_actor (film_id, actor_id) VALUES (1,11);
-    INSERT INTO film_actor (film_id, actor_id) VALUES (1,13);
-    INSERT INTO film_actor (film_id, actor_id) VALUES (1,15);
-    INSERT INTO film_actor (film_id, actor_id) VALUES (1,17);
-    INSERT INTO film_actor (film_id, actor_id) VALUES (1,21);
-    INSERT INTO film_actor (film_id, actor_id) VALUES (1,23);
-    INSERT INTO film_actor (film_id, actor_id) VALUES (1,25);
+FOR i IN 2..9 LOOP
+
+    -- update film.actors_xml
+	UPDATE film 
+	SET 
+		actors_xml = REGEXP_REPLACE(
+        	xmlroot(xmlElement(name actors,
+                      xpath('/actors/actor', actors_xml)
+                           || xmlElement(name actor, xmlforest(i as actor_id))
+                  ), version '1.0')::text,
+        '<element>|</element>',
+        '', 'g')::xml
+	WHERE film_id = 1;
+
+    -- update actor.films_xml
+    UPDATE actor 
+	SET 
+		films_xml = REGEXP_REPLACE(
+        	xmlroot(xmlElement(name films,
+                      xpath('/films/film', films_xml)
+                           || xmlElement(name film, xmlforest(1 as film_id))
+                  ), version '1.0')::text,
+        '<element>|</element>',
+        '', 'g')::xml
+	WHERE actor_id = i;
+
+END LOOP;
 
 END
 $do$;

@@ -4,7 +4,7 @@ SAVEPOINT save;
 
 DO $do$
 BEGIN
-FOR i IN 1..1000 LOOP
+FOR i IN 1..5000 LOOP
 
 	UPDATE film 
 	SET 
