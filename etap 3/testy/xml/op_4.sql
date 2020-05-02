@@ -3,10 +3,22 @@ BEGIN;
 SAVEPOINT save;
 
 DO $do$
-DECLARE 
-	old_title text := (select title from film where film_id = 1);
 BEGIN
-
+	UPDATE film 
+	SET 
+		title = 'New title3',
+		change_history_xml = REGEXP_REPLACE(
+        	xmlroot(xmlElement(name changes,
+                      xpath('/changes/change', change_history_xml)
+                           || xmlElement(name change, xmlforest(
+							   now() AS change_date,
+                               'title' as field_name,
+                               (select title from film where film_id = 1) as old_value,
+                               'New title3' as new_value))
+                  ), version '1.0')::text,
+        '<element>|</element>',
+        '', 'g')::xml
+	WHERE film_id = 1;
 END $do$;
 
 ROLLBACK TO SAVEPOINT save;

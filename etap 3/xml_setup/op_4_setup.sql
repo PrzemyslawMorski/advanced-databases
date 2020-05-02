@@ -1,0 +1,1 @@
+ALTER TABLE film ADD COLUMN change_history_xml xml DEFAULT xmlroot(xmlelement(name changes), version '1.0');
