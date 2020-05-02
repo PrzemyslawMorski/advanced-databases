@@ -5,11 +5,16 @@ SAVEPOINT save;
 DO
 $do$
 BEGIN 
-   FOR i IN 343000..353000 LOOP
-
-   INSERT INTO film_actor (film_id, actor_id) VALUES (i,i-240000);
-
-   END LOOP;
+   INSERT INTO film_actor (film_id, actor_id) VALUES (1,3);
+   INSERT INTO film_actor (film_id, actor_id) VALUES (1,5);
+   INSERT INTO film_actor (film_id, actor_id) VALUES (1,7);
+   INSERT INTO film_actor (film_id, actor_id) VALUES (1,11);
+   INSERT INTO film_actor (film_id, actor_id) VALUES (1,13);
+   INSERT INTO film_actor (film_id, actor_id) VALUES (1,15);
+   INSERT INTO film_actor (film_id, actor_id) VALUES (1,17);
+   INSERT INTO film_actor (film_id, actor_id) VALUES (1,21);
+   INSERT INTO film_actor (film_id, actor_id) VALUES (1,23);
+   INSERT INTO film_actor (film_id, actor_id) VALUES (1,25);
 END
 $do$;
 
