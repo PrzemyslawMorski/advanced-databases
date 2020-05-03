@@ -6,7 +6,7 @@ DO
 $do$
 BEGIN 
 
-FOR i IN 2..9 LOOP
+FOR i IN 1..200 LOOP
 
     -- update film.actors_xml
 	UPDATE film 

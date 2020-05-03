@@ -1,4 +1,4 @@
-psql -h dvd_rental_db -p 5432 -U postgres -d dvdrental -h dvd_rental_db -p 5432 -U postgres -d dvdrental -c '\copy public.actor (actor_id, first_name, last_name, last_update) from /migrator_volume/3057.dat'
+psql -h dvd_rental_db -p 5432 -U postgres -d dvdrental -c '\copy public.actor (actor_id, first_name, last_name, last_update) from /migrator_volume/3057.dat'
 psql -h dvd_rental_db -p 5432 -U postgres -d dvdrental -c '\copy public.country (country_id, country, last_update) from /migrator_volume/3069.dat'
 psql -h dvd_rental_db -p 5432 -U postgres -d dvdrental -c '\copy public.city (city_id, city, country_id, last_update) from /migrator_volume/3067.dat'
 psql -h dvd_rental_db -p 5432 -U postgres -d dvdrental -c '\copy public.address (address_id, address, address2, district, city_id, postal_code, phone, last_update) from /migrator_volume/3065.dat'
