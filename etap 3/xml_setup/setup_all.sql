@@ -1,4 +1,5 @@
-ALTER TABLE city ADD COLUMN rentals_xml xml DEFAULT xmlroot(xmlelement(name rentals), version '1.0');
+
+ALTER TABLE public.city ADD COLUMN rentals_xml xml DEFAULT xmlroot(xmlelement(name rentals), version '1.0');
 
 -- AFTER INSERT RENTAL TRIGGER
 CREATE OR REPLACE FUNCTION public.update_city_rentals_after_rental_insert() RETURNS trigger
@@ -26,18 +27,18 @@ END;
 $$ LANGUAGE plpgsql;
  
 
-DROP TRIGGER IF EXISTS update_city_rentals_after_rental_insert_trigger ON public.rental;
+DROP TRIGGER IF EXISTS public.update_city_rentals_after_rental_insert_trigger ON public.rental;
 
-CREATE CONSTRAINT TRIGGER update_city_rentals_after_rental_insert_trigger
+CREATE CONSTRAINT TRIGGER public.update_city_rentals_after_rental_insert_trigger
    AFTER INSERT ON public.rental
    INITIALLY IMMEDIATE
    FOR EACH ROW 
    EXECUTE PROCEDURE public.update_city_rentals_after_rental_insert();
 
 
-ALTER TABLE film ADD COLUMN actors_xml xml DEFAULT xmlroot(xmlelement(name actors), version '1.0');
-ALTER TABLE actor ADD COLUMN films_xml xml DEFAULT xmlroot(xmlelement(name films), version '1.0');
-ALTER TABLE film ADD COLUMN change_history_xml xml DEFAULT xmlroot(xmlelement(name changes), version '1.0');
+ALTER TABLE public.film ADD COLUMN actors_xml xml DEFAULT xmlroot(xmlelement(name actors), version '1.0');
+ALTER TABLE public.actor ADD COLUMN films_xml xml DEFAULT xmlroot(xmlelement(name films), version '1.0');
+ALTER TABLE public.film ADD COLUMN change_history_xml xml DEFAULT xmlroot(xmlelement(name changes), version '1.0');
 
 CREATE TABLE public.rentals_by_year (
     year int PRIMARY KEY,
@@ -70,7 +71,7 @@ END;
 $$ LANGUAGE plpgsql;
  
 
-DROP TRIGGER IF EXISTS insert_into_rentals_by_year_after_rental_insert_trigger ON public.rental;
+DROP TRIGGER IF EXISTS public.insert_into_rentals_by_year_after_rental_insert_trigger ON public.rental;
 
 CREATE CONSTRAINT TRIGGER insert_into_rentals_by_year_after_rental_insert_trigger
    AFTER INSERT ON public.rental
