@@ -1,52 +1,22 @@
 version: "2.1"
-# using 2.1 here allows for easy health-check syntax
-# bumping to 3.X would require implementing manual health checking in the migrator
 
 services:
   database:
     container_name: dvd_rental_db
-    image: postgres
+    image: postgis/postgis
     ports:
       - 5432:5432
     environment:
       - PGPASSWORD=password
       - POSTGRES_PASSWORD=password
       - POSTGRES_HOST_AUTH_METHOD=trust
-    networks:
-      - dvd_rental_network
-    mem_limit: 1G
+    networks: 
+      - rentals_network
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U postgres"]
       interval: 10s
       timeout: 5s
       retries: 5
 
-  migrator:
-    image: postgres
-    privileged: true
-    environment:
-      - PGPASSWORD=password
-    volumes:
-      - ./migrator_volume:/migrator_volume:ro
-    depends_on:
-      database:
-        condition: service_healthy
-    networks:
-      - dvd_rental_network
-    command: bash -c "psql -h dvd_rental_db -p 5432 -U postgres -w -a -f /migrator_volume/restore.sql && sh /migrator_volume/restore.sh"
-
-  pgadmin:
-    image: dpage/pgadmin4
-    container_name: dvd_rental_pgadmin
-    ports:
-      - 5430:80
-    environment:
-      - PGADMIN_DEFAULT_EMAIL=admin
-      - PGADMIN_DEFAULT_PASSWORD=admin
-    volumes:
-      - ./pgadmin_servers.json:/pgadmin4/servers.json
-    networks:
-      - dvd_rental_network
-
 networks:
-  dvd_rental_network:
+  rentals_network:

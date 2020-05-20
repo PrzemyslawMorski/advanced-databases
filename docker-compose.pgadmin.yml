@@ -1,0 +1,19 @@
+version: "2.1"
+
+services:
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: dvd_rental_pgadmin
+    ports:
+      - 5430:80
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=admin
+      - PGADMIN_DEFAULT_PASSWORD=admin
+    networks:
+      - advanced-databases_rentals_network
+    volumes:
+      - ./pgadmin_servers.json:/pgadmin4/servers.json
+
+networks:
+  advanced-databases_rentals_network:
+    external: true

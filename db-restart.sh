@@ -1,1 +1,1 @@
-docker-compose run migrator
+docker-compose -f docker-compose.migrator.yml run migrator
