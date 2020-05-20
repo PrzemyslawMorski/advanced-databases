@@ -17,7 +17,7 @@ SET lock_timeout = 0;
 SET idle_in_transaction_session_timeout = 0;
 SET client_encoding = 'UTF8';
 SET standard_conforming_strings = on;
-SELECT pg_catalog.set_config('search_path', '', false);
+SELECT pg_catalog.set_config('search_path', 'public', false);
 SET check_function_bodies = false;
 SET client_min_messages = warning;
 SET row_security = off;
@@ -39,10 +39,22 @@ SET lock_timeout = 0;
 SET idle_in_transaction_session_timeout = 0;
 SET client_encoding = 'UTF8';
 SET standard_conforming_strings = on;
-SELECT pg_catalog.set_config('search_path', '', false);
+SELECT pg_catalog.set_config('search_path', 'public', false);
 SET check_function_bodies = false;
 SET client_min_messages = warning;
 SET row_security = off;
+
+CREATE EXTENSION postgis;
+CREATE EXTENSION postgis_raster;
+CREATE EXTENSION postgis_topology;
+CREATE EXTENSION postgis_sfcgal;
+CREATE EXTENSION fuzzystrmatch;
+CREATE EXTENSION postgis_tiger_geocoder;
+CREATE EXTENSION address_standardizer;
+
+\x
+
+\dc postgis*
 
 --
 -- Name: mpaa_rating; Type: TYPE; Schema: public; Owner: postgres
@@ -449,6 +461,7 @@ CREATE TABLE public.film (
     title character varying(255) NOT NULL,
     description text,
     release_year public.year,
+    film_shoot_locations geography(MULTIPOINT),
     language_id integer NOT NULL,
     rental_duration integer DEFAULT 3 NOT NULL,
     rental_rate numeric(10,2) DEFAULT 4.99 NOT NULL,
@@ -534,6 +547,7 @@ CREATE TABLE public.address (
     address_id serial NOT NULL,
     address character varying(100) NOT NULL,
     address2 character varying(50),
+    location geography(POINT),
     district character varying(20) NOT NULL,
     city_id integer NOT NULL,
     postal_code character varying(100),
@@ -862,6 +876,7 @@ CREATE TABLE public.store (
     store_id serial NOT NULL,
     manager_staff_id integer NOT NULL,
     address_id integer NOT NULL,
+    area_of_influence geography(POLYGON),
     last_update timestamp without time zone DEFAULT now() NOT NULL
 );
 
