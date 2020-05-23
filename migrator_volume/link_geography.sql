@@ -31,7 +31,20 @@ $do$;
 
 -- city
 ALTER TABLE public.city ADD COLUMN borders geography(MULTIPOLYGON);
--- UPDATE public.country SET borders = (SELECT geom FROM gadm36_pol_0 limit 1);
+DO
+$do$
+DECLARE 
+  arow record;
+BEGIN 
+  FOR arow IN (SELECT * FROM public.city) LOOP
+  	WITH random_city as (SELECT geom, name_2 FROM gadm36_pol_3 order by random() limit 1)
+	  UPDATE public.city SET 
+	  	borders = (select geom from random_city), 
+		city = (select name_2 from random_city) 
+	  WHERE city_id = arow.city_id;  
+  END LOOP;
+END
+$do$ LANGUAGE plpgsql;
 
 -- address
 ALTER TABLE public.address ADD COLUMN location geography(POINT);
