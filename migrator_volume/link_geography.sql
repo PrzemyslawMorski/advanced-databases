@@ -91,3 +91,20 @@ $do$ LANGUAGE plpgsql;
 
 -- store
 ALTER TABLE public.store ADD COLUMN area_of_influence geography(POLYGON);
+DO
+$do$
+DECLARE 
+  arow record;
+BEGIN 
+  FOR arow IN (SELECT * FROM public.store) LOOP
+  	WITH area_of_incluence as (
+		SELECT ST_MinimumBoundingCircle(ST_Collect(ST_GeneratePoints(borders::geometry, 4))) 
+		FROM public.city ct join address ad on ct.city_id = ad.city_id
+		WHERE ad.address_id = arow.address_id
+	)
+	  UPDATE public.store SET 
+	  	area_of_influence = (SELECT * from area_of_incluence)
+	  WHERE store_id = arow.store_id;  
+  END LOOP;
+END
+$do$ LANGUAGE plpgsql;
