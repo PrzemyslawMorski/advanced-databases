@@ -19,8 +19,8 @@ services:
       - ./migrator_volume:/migrator_volume
     networks:
       - advanced-databases_rentals_network
-    command: sh /migrator_volume/restore.sh
-    
+    command: sh /migrator_volume/add_geography.sh
+
   geography-linker:
     image: postgis/postgis
     privileged: true

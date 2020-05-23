@@ -19,12 +19,12 @@ CREATE EXTENSION if not exists postgis_tiger_geocoder;
 CREATE EXTENSION if not exists address_standardizer;
 
 -- country
-ALTER TABLE public.country ADD COLUMN borders geography(POLYGON);
-
-
+ALTER TABLE public.country ADD COLUMN borders geography(MULTIPOLYGON);
+UPDATE public.country SET borders = (SELECT geom FROM gadm36_pol_0 limit 1);
 
 -- city
-ALTER TABLE public.city ADD COLUMN borders geography(POLYGON);
+ALTER TABLE public.city ADD COLUMN borders geography(MULTIPOLYGON);
+-- UPDATE public.country SET borders = (SELECT geom FROM gadm36_pol_0 limit 1);
 
 -- address
 ALTER TABLE public.address ADD COLUMN location geography(POINT);
@@ -33,4 +33,4 @@ ALTER TABLE public.address ADD COLUMN location geography(POINT);
 ALTER TABLE public.film ADD COLUMN film_shoot_locations geography(MULTIPOINT);
 
 -- store
-ALTER TABLE public.store ADD COLUMN area_of_influence geography(POLYGON);
+ALTER TABLE public.store ADD COLUMN area_of_influence geography(MULTIPOLYGON);
