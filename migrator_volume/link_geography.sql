@@ -48,9 +48,46 @@ $do$ LANGUAGE plpgsql;
 
 -- address
 ALTER TABLE public.address ADD COLUMN location geography(POINT);
-    
+DO
+$do$
+DECLARE 
+  arow record;
+BEGIN 
+  FOR arow IN (SELECT * FROM public.address) LOOP
+  	WITH address_city as (
+		SELECT ST_PointN(ST_MakeLine(ST_GeneratePoints(borders::geometry, 1)), 1) 
+		FROM public.city 
+		where city_id = arow.city_id
+	)
+	  UPDATE public.address SET 
+	  	location = (SELECT * from address_city)
+	  WHERE address_id = arow.address_id;  
+  END LOOP;
+END
+$do$ LANGUAGE plpgsql;
+
+
 -- film
-ALTER TABLE public.film ADD COLUMN film_shoot_locations geography(MULTIPOINT);
+ALTER TABLE public.film ADD COLUMN film_shoot_locations geography(LINESTRING);
+DO
+$do$
+DECLARE 
+  arow record;
+BEGIN 
+  FOR arow IN (SELECT * FROM public.film) LOOP
+  	WITH random_points as (
+		SELECT location
+		FROM public.address 
+    ORDER BY random()
+    LIMIT 10
+	)
+	  UPDATE public.film SET 
+	  	film_shoot_locations = ST_MakeLine(SELECT * from random_points)
+	  WHERE film_id = arow.film_id;  
+  END LOOP;
+END
+$do$ LANGUAGE plpgsql;
+
 
 -- store
 ALTER TABLE public.store ADD COLUMN area_of_influence geography(MULTIPOLYGON);
