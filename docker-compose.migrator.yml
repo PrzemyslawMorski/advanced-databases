@@ -20,6 +20,17 @@ services:
     networks:
       - advanced-databases_rentals_network
     command: sh /migrator_volume/restore.sh
+    
+  geography-linker:
+    image: postgis/postgis
+    privileged: true
+    environment:
+      - PGPASSWORD=password
+    volumes:
+      - ./migrator_volume:/migrator_volume
+    networks:
+      - advanced-databases_rentals_network
+    command: bash -c "psql -h dvd_rental_db -p 5432 -U postgres -w -a -f /migrator_volume/link_geography.sql"
 
 networks:
   advanced-databases_rentals_network:
