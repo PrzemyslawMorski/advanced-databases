@@ -44,15 +44,13 @@ SET check_function_bodies = false;
 SET client_min_messages = warning;
 SET row_security = off;
 
-CREATE EXTENSION postgis;
--- CREATE EXTENSION postgis_raster;
--- CREATE EXTENSION postgis_topology;
--- CREATE EXTENSION postgis_sfcgal;
--- CREATE EXTENSION fuzzystrmatch;
--- CREATE EXTENSION postgis_tiger_geocoder;
--- CREATE EXTENSION address_standardizer;
-
-ogr2ogr -f PostgreSQL "PG:dbname=dvdrental" gadm36_POL.gpkg
+CREATE EXTENSION if not exists postgis;
+CREATE EXTENSION if not exists postgis_raster;
+CREATE EXTENSION if not exists postgis_topology;
+CREATE EXTENSION if not exists postgis_sfcgal;
+CREATE EXTENSION if not exists fuzzystrmatch;
+CREATE EXTENSION if not exists postgis_tiger_geocoder;
+CREATE EXTENSION if not exists address_standardizer;
 
 --
 -- Name: mpaa_rating; Type: TYPE; Schema: public; Owner: postgres
