@@ -2,17 +2,15 @@ version: "2.1"
 
 services:
   migrator:
-    build:
-      context: postgis
+    image: postgis/postgis-build-env:latest
     privileged: true
     environment:
       - PGPASSWORD=password
     volumes:
       - ./migrator_volume:/migrator_volume:ro
-    networks: 
+    networks:
       - advanced-databases_rentals_network
-    command: bash -c "psql -h dvd_rental_db -p 5432 -U postgres -w -a -f /migrator_volume/restore.sql && ogr2ogr -f PostgreSQL 'PG:dbname=gadm' gadm36_POL.gpkg"
-    #  && sh /migrator_volume/restore.sh
+    command: bash -c "psql -h dvd_rental_db -p 5432 -U postgres -w -a -f /migrator_volume/restore.sql && sh /migrator_volume/restore.sh"
 
 networks:
   advanced-databases_rentals_network:
