@@ -3,7 +3,8 @@ version: "2.1"
 services:
   database:
     container_name: dvd_rental_db
-    image: postgis/postgis
+    build:
+      context: postgis
     ports:
       - 5432:5432
     environment:
