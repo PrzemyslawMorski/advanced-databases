@@ -20,7 +20,14 @@ CREATE EXTENSION if not exists address_standardizer;
 
 -- country
 ALTER TABLE public.country ADD COLUMN borders geography(MULTIPOLYGON);
-UPDATE public.country SET borders = (SELECT geom FROM gadm36_pol_0 limit 1);
+DO
+$do$
+DECLARE
+	polish_geog geography = (SELECT geom FROM gadm36_pol_0 limit 1);
+BEGIN 
+  UPDATE public.country SET borders = polish_geog;
+END
+$do$;
 
 -- city
 ALTER TABLE public.city ADD COLUMN borders geography(MULTIPOLYGON);
