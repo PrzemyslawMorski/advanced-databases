@@ -68,7 +68,7 @@ $do$ LANGUAGE plpgsql;
 
 
 -- film
-ALTER TABLE public.film ADD COLUMN film_shoot_locations geography(LINESTRING);
+ALTER TABLE public.film ADD COLUMN film_shoot_locations geography(MULTIPOINT);
 DO
 $do$
 DECLARE 
@@ -77,7 +77,7 @@ DECLARE
 BEGIN 
   FOR arow IN (SELECT * FROM public.film) LOOP
   	WITH random_points as (
-		SELECT ST_MakeLine(ARRAY(SELECT unnest(points)
+		SELECT ST_Collect(ARRAY(SELECT unnest(points)
 							ORDER BY random()
 					    	LIMIT (floor(random() * 10 + 1)::int)))
 	)
