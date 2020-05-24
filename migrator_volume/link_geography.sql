@@ -73,14 +73,14 @@ DO
 $do$
 DECLARE 
   arow record;
-  points geometry[] = (ARRAY(SELECT location::geometry FROM public.address));
 BEGIN 
   FOR arow IN (SELECT * FROM public.film) LOOP
   	WITH random_points as (
-		SELECT ST_Collect(ARRAY(SELECT unnest(points)
-							ORDER BY random()
-					    	LIMIT (floor(random() * 10 + 1)::int)))
-	)
+		SELECT ST_Collect(ARRAY(SELECT location::geometry from address
+							TABLESAMPLE SYSTEM(
+								(floor(random() * 10 + 1)::int)
+							) limit (floor(random() * 10 + 1)::int)))
+		)
 	  UPDATE public.film SET 
 	  	film_shoot_locations = (select * from random_points)
 	  WHERE film_id = arow.film_id;  
