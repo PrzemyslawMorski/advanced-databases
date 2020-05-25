@@ -48,6 +48,6 @@ def run_test(query_path, num_tests):
 # setup
 # restore_db()
 
-for path in glob.iglob('test/**', recursive=True):
+for path in glob.iglob('etap 1/load_test_queries/customer_set/**', recursive=True):
     if (Path(path).name.endswith('.sql')):
-        run_test(path, 10)
+        run_test(path, 1)

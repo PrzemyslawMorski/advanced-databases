@@ -3,7 +3,7 @@ BEGIN;
 SAVEPOINT save;
 
 delete from
-    actors a
+    actor a
 where
     a.actor_id not in (
         select
