@@ -1,3 +1,5 @@
+DROP TABLE IF EXISTS customer_column_storage;
+
 select *
 into customer_column_storage
 from (
