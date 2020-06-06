@@ -5,8 +5,6 @@ insert into
     rental_column_storage (
 		rental_id, 
 		customer_id,
-		amount,
-		payment_date,
 		first_name,
 		email,
 		address,
@@ -29,15 +27,6 @@ select
             random()
         limit
             1
-    ),
--- 	payment_amount
-	(
-		random() * 10
-	),
--- 	payment_date
-    (
-        select
-            NOW() + (random() * (NOW() + '90 days' - NOW())) + '30 days'
     ),
 -- s.first_name, 
 'Tomasz',
