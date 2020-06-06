@@ -8,5 +8,4 @@ from
 	left outer join customer cust on cust.customer_id = r.customer_id
 	left outer join address ad on cust.address_id = ad.address_id
 	left outer join city c on c.city_id = ad.city_id
-where city = 'Manchester'
 order by city, title;
