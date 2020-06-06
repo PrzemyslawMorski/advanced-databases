@@ -20,3 +20,5 @@ from (
 		join country ctry on ct.country_id = ctry.country_id
 ) as customer_data;
 
+ALTER TABLE customer_column_storage ADD PRIMARY KEY (customer_id);
+ALTER TABLE customer_column_storage ADD CONSTRAINT FK_Store FOREIGN KEY (store_id) REFERENCES store(store_id);
