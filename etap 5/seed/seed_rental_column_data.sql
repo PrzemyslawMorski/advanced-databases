@@ -1,5 +1,5 @@
 DROP TABLE IF EXISTS rental_column_storage;
-SELECT r.rental_id, r.customer_id, p.amount, p.payment_date, s.first_name, s.email, a.address, c.city, country.country, f.title, f.description, f.release_year 
+SELECT r.rental_id, r.rental_date, r.return_date, r.customer_id, p.amount, p.payment_date, s.first_name, s.email, a.address, c.city, country.country, f.title, f.description, f.release_year 
 	INTO rental_column_storage
 	FROM public.rental r join public.inventory i on r.inventory_id=i.inventory_id
 	join public.film f on i.inventory_id=f.film_id
