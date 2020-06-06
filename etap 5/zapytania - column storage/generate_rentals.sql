@@ -4,6 +4,7 @@ SAVEPOINT save;
 insert into
     rental_column_storage (
 		rental_id, 
+        rental_date,
 		customer_id,
 		first_name,
 		email,
@@ -17,6 +18,11 @@ insert into
 select
 -- rental_id
     generated,
+-- rental_date
+    (
+        select
+            NOW() + (random() * (NOW() + '90 days' - NOW())) + '30 days'
+    ),
 -- 	customer_id
 	(
         select
