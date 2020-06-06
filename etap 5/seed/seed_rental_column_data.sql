@@ -11,5 +11,5 @@ SELECT r.rental_id, r.customer_id, p.amount, p.payment_date, s.first_name, s.ema
 	join public.country country on c.country_id=country.country_id;
 
 ALTER TABLE rental_column_storage 
-ADD CONSTRAINT customerid_fk FOREIGN KEY (customer_id) REFERENCES public.customer(customer_id);
+ADD CONSTRAINT customerid_fk FOREIGN KEY (customer_id) REFERENCES public.customer_column_storage(customer_id);
 ALTER TABLE rental_column_storage ADD PRIMARY KEY (rental_id);
