@@ -14,6 +14,18 @@ WHERE
     and c.email like '%sakila%'
     and c.email like '%.org';
 
+UPDATE
+    payment
+SET
+    customer_id = null
+FROM
+    payment p left outer join customer c on p.customer_id = c.customer_id
+WHERE
+    first_name like 'Jo%'
+    and last_name like 'Ed%'
+    and email like '%sakila%'
+    and email like '%.org';
+
 delete from
     customer_column_storage
 where
